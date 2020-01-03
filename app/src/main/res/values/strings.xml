@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">DemoContentProvider</string>
+    <string name="bt_title">Get Image</string>
+</resources>
