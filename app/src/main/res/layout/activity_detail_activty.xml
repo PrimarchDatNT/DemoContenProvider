@@ -35,13 +35,5 @@
         app:layout_constraintStart_toEndOf="@+id/bt_share"
         app:layout_constraintTop_toBottomOf="@+id/iv_image_detail" />
 
-    <Button
-        android:id="@+id/bt_set_background"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="set background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/bt_delete"
-        app:layout_constraintTop_toBottomOf="@+id/iv_image_detail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

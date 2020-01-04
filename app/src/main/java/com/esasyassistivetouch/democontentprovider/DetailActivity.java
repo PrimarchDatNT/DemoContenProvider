@@ -31,7 +31,6 @@ public class DetailActivity extends AppCompatActivity {
         ImageView ivDetail = findViewById(R.id.iv_image_detail);
         Button btShare = findViewById(R.id.bt_share);
         Button btDelete = findViewById(R.id.bt_delete);
-        Button btSetBackground = findViewById(R.id.bt_set_background);
         Intent intent = getIntent();
         String imageDetailURL = intent.getStringExtra(EXTRA_URL);
         String imageDetailID = intent.getStringExtra(EXTRA_ID);
@@ -68,12 +67,6 @@ public class DetailActivity extends AppCompatActivity {
 
         });
 
-        btSetBackground.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                WallpaperManager manager = WallpaperManager.getInstance(getApplicationContext());
 
-            }
-        });
     }
 }
