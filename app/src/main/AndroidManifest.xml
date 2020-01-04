@@ -4,6 +4,19 @@
     package="com.esasyassistivetouch.democontentprovider">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+
+    <permission
+        android:name="com.segu.demo.provider.WRITE_DATABASE"
+        android:label="Write Database"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="com.segu.demo.provider.READ_DATABASE"
+        android:label="Read Database"
+        android:protectionLevel="normal" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +26,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".DetailActivity"></activity>
+
+
+        <activity android:name=".ResultActivity" />
+        <activity android:name=".CreateDBActivity" />
+
+        <provider
+            android:name=".CustomProvider"
+            android:authorities="com.segu.demo.provider"
+            android:enabled="true"
+            android:exported="true"
+            android:readPermission="com.segu.demo.provider.READ_DATABASE"
+            android:writePermission="com.segu.demo.provider.WRITE_DATABASE" />
+
+        <activity android:name=".DetailActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

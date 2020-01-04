@@ -18,11 +18,13 @@ import java.util.List;
 public class ImageResultAdapter extends RecyclerView.Adapter<ImageResultAdapter.ListImageViewHolder> {
 
     private List<String> detailInformationList;
+    private List<String> listImageId;
     private Context context;
     private OnItemClickListener onItemClickListener;
 
-    public ImageResultAdapter(List<String> detailInformationList, Context context) {
+    public ImageResultAdapter(List<String> detailInformationList,List<String> listImageId, Context context) {
         this.detailInformationList = detailInformationList;
+        this.listImageId = listImageId;
         this.context = context;
     }
 
@@ -37,7 +39,9 @@ public class ImageResultAdapter extends RecyclerView.Adapter<ImageResultAdapter.
     @Override
     public void onBindViewHolder(@NonNull ListImageViewHolder holder, int position) {
         String imageURL = detailInformationList.get(position);
+        String imageID = listImageId.get(position);
         holder.tvImageURL.setText(imageURL);
+        holder.tvImageName.setText(imageID);
         Glide.with(context).load(imageURL).into(holder.ivImageResult);
 
     }
