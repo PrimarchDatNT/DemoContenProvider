@@ -24,17 +24,22 @@ public class CreateDBActivity extends AppCompatActivity {
         btAdd.setOnClickListener(v -> {
             ContentValues values = new ContentValues();
 
-            values.put(CustomProvider.NAME, edStudentName.getText().toString());
+            values.put(StudentProvider.COLUMN_STUDENT_NAME, edStudentName.getText().toString());
 
-            values.put(CustomProvider.UNI, edStudentUni.getText().toString());
+            values.put(StudentProvider.COLUMN_STUDENT_UNIVERSITY, edStudentUni.getText().toString());
 
-            Uri uri = getContentResolver().insert(CustomProvider.CONTENT_URI, values);
+            Uri uri = getContentResolver().insert(StudentProvider.CONTENT_URI, values);
 
             if (uri != null) {
                 Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
             }
 
         });
-        btRetrive.setOnClickListener(v -> startActivity(new Intent(CreateDBActivity.this,ResultActivity.class)));
+        btRetrive.setOnClickListener(v -> {
+            Intent launchIntent = getPackageManager().getLaunchIntentForPackage("com.esasyassistivetouch.getdatafrommyprovider");
+            if (launchIntent != null) {
+                startActivity(launchIntent);//null pointer check in case package name was not found
+            }
+        });
     }
 }

@@ -118,7 +118,7 @@ public class CustomProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        int count = 0;
+        int count;
 
         switch (uriMatcher.match(uri)){
             case STUDENTS:

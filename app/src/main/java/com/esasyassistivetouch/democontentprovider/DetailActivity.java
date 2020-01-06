@@ -1,6 +1,5 @@
 package com.esasyassistivetouch.democontentprovider;
 
-import android.app.WallpaperManager;
 import android.content.ContentUris;
 import android.content.Intent;
 import android.net.Uri;
@@ -8,15 +7,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-
-import java.util.Objects;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -50,8 +47,8 @@ public class DetailActivity extends AppCompatActivity {
 
                     if (imageDetailID != null) {
                         Uri deleteUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, Long.parseLong(imageDetailID));
-                        getContentResolver().delete(deleteUri
-                                , MediaStore.MediaColumns._ID + "=" + imageDetailID, null);
+                        getContentResolver().delete(deleteUri, MediaStore.MediaColumns._ID + "=" + imageDetailID, null);
+                        Log.e("CV", "onCreate: " +MediaStore.MediaColumns._ID );
                         ivDetail.setImageResource(R.drawable.ic_launcher_background);
                     }
                 } else {

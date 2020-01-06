@@ -9,12 +9,13 @@
         android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
 
+
     <permission
-        android:name="com.segu.demo.provider.WRITE_DATABASE"
+        android:name="com.esasyassistivetouch.democontentprovider.StudentProvider.WRITE_DATABASE"
         android:label="Write Database"
         android:protectionLevel="normal" />
     <permission
-        android:name="com.segu.demo.provider.READ_DATABASE"
+        android:name="com.esasyassistivetouch.democontentprovider.StudentProvider.READ_DATABASE"
         android:label="Read Database"
         android:protectionLevel="normal" />
 
@@ -27,6 +28,13 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
+        <provider
+            android:name=".StudentProvider"
+            android:authorities="com.esasyassistivetouch.democontentprovider.StudentProvider"
+            android:enabled="true"
+            android:exported="true"
+            android:readPermission="com.esasyassistivetouch.democontentprovider.StudentProvider.READ_DATABASE"
+            android:writePermission="com.esasyassistivetouch.democontentprovider.StudentProvider.WRITE_DATABASE" />
 
         <activity android:name=".ResultActivity" />
         <activity android:name=".CreateDBActivity" />
