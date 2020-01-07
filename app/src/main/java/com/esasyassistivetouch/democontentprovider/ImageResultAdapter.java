@@ -13,19 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ImageResultAdapter extends RecyclerView.Adapter<ImageResultAdapter.ListImageViewHolder> {
 
-    private List<String> detailInformationList;
-    private List<String> listImageId;
+    private List<ImageResult> listResult;
     private Context context;
     private OnItemClickListener onItemClickListener;
 
-    public ImageResultAdapter(List<String> detailInformationList,List<String> listImageId, Context context) {
-        this.detailInformationList = detailInformationList;
-        this.listImageId = listImageId;
+    public ImageResultAdapter(Context context, List<ImageResult> listResult) {
         this.context = context;
+        this.listResult = listResult;
     }
 
     @NonNull
@@ -38,26 +37,34 @@ public class ImageResultAdapter extends RecyclerView.Adapter<ImageResultAdapter.
     @SuppressLint({"CheckResult", "SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull ListImageViewHolder holder, int position) {
-        String imageURL = detailInformationList.get(position);
-        String imageID = listImageId.get(position);
-        holder.tvImageURL.setText(imageURL);
-        holder.tvImageName.setText(imageID);
-        Glide.with(context).load(imageURL).into(holder.ivImageResult);
+        ImageResult result = listResult.get(position);
+        holder.tvImageSize.setText(formatSize(Long.parseLong(result.getSize())));
+        holder.tvImageID.setText(result.getId());
+        holder.tvImageName.setText(result.getName());
+        holder.tvImageURL.setText(result.getPath());
+        Glide.with(context).load(result.getPath()).into(holder.ivImageResult);
 
     }
 
     @Override
     public int getItemCount() {
-        return detailInformationList.size();
+        return listResult.size();
     }
 
     public void setItemOnclickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
+    private String formatSize(long size) {
+
+        if (size <= 0) return "0";
+        final String[] units = new String[]{"B", "kB", "MB", "GB", "TB"};
+        int digitGroups = (int) (Math.log10(size) / Math.log10(1024));
+        return new DecimalFormat("#,##0.#").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+    }
 
 
     public class ListImageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView tvImageName, tvImageURL;
+        TextView tvImageName, tvImageURL, tvImageID, tvImageSize;
         ImageView ivImageResult;
         OnItemClickListener onItemClickListener;
 
@@ -67,6 +74,8 @@ public class ImageResultAdapter extends RecyclerView.Adapter<ImageResultAdapter.
             ivImageResult = itemView.findViewById(R.id.iv_result);
             tvImageName = itemView.findViewById(R.id.tv_image_name);
             tvImageURL = itemView.findViewById(R.id.tv_image_url);
+            tvImageID = itemView.findViewById(R.id.tv_image_id);
+            tvImageSize = itemView.findViewById(R.id.tv_image_size);
             this.onItemClickListener = mOnItemClickListener;
         }
 

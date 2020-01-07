@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,7 +19,7 @@ public class CreateDBActivity extends AppCompatActivity {
         EditText edStudentName = findViewById(R.id.ed_student_name);
         EditText edStudentUni = findViewById(R.id.ed_student_uni);
         Button btAdd = findViewById(R.id.bt_add);
-        Button btRetrive= findViewById(R.id.bt_retrive);
+        Button btRetrive = findViewById(R.id.bt_retrive);
         btAdd.setOnClickListener(v -> {
             ContentValues values = new ContentValues();
 
@@ -33,6 +32,16 @@ public class CreateDBActivity extends AppCompatActivity {
             if (uri != null) {
                 Toast.makeText(getBaseContext(), uri.toString(), Toast.LENGTH_LONG).show();
             }
+
+/*            for (int i = 0; i < 10000; i++) {
+                ContentValues values = new ContentValues();
+
+                values.put(StudentProvider.COLUMN_STUDENT_NAME, i + "");
+
+                values.put(StudentProvider.COLUMN_STUDENT_UNIVERSITY, i + "");
+
+                getContentResolver().insert(StudentProvider.CONTENT_URI, values);
+            }*/
 
         });
         btRetrive.setOnClickListener(v -> {

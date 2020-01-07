@@ -49,32 +49,16 @@ public class StudentProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-/*        switch (uriMatcher.match(uri)) {
-            SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-            queryBuilder.setTables(TABLE_NAME_STUDENT);
-
+        switch (uriMatcher.match(uri)) {
             case URI_TABLE_STUDENT_CODE:
-                return database.query(TABLE_NAME_STUDENT, projection, selection, selectionArgs, null, null, sortOrder);
-
             case URI_COLUMN_STUDENT_ID_CODE:
-                queryBuilder.
-                return database.query(TABLE_NAME_STUDENT, )
-
             case URI_COLUMN_STUDENT_NAME_CODE:
-                return database.rawQuery("SELECT  " + COLUMN_STUDENT_NAME + " FROM " + TABLE_NAME_STUDENT +
-                        " WHERE " + Arrays.toString(projection) + "=" + selection + " ORDER BY " + sortOrder, selectionArgs);
-
             case URI_COLUMN_STUDENT_UNIVERSITY_CODE:
-                database.rawQuery("SELECT " + COLUMN_STUDENT_UNIVERSITY + " FROM " + TABLE_NAME_STUDENT +
-                        " WHERE " + Arrays.toString(projection) + "=" + selection + " ORDER BY " + sortOrder, selectionArgs);
+                return database.query(TABLE_NAME_STUDENT, projection, selection, selectionArgs, null, null, sortOrder);
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
-        }*/
-
-        return database.query(TABLE_NAME_STUDENT, projection, selection, selectionArgs, null, null, sortOrder);
-
+        }
     }
-
 
     @Nullable
     @Override
@@ -122,7 +106,22 @@ public class StudentProvider extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+        switch (uriMatcher.match(uri)) {
+            case URI_COLUMN_STUDENT_ID_CODE:
+                return database.update(TABLE_NAME_STUDENT, values, COLUMN_STUDENT_ID + " = " + uri.getPathSegments().get(1) +
+                        (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
+
+            case URI_COLUMN_STUDENT_NAME_CODE:
+                return database.update(TABLE_NAME_STUDENT, values, COLUMN_STUDENT_NAME + " = " + uri.getPathSegments().get(1) +
+                        (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
+
+            case URI_COLUMN_STUDENT_UNIVERSITY_CODE:
+                return database.update(TABLE_NAME_STUDENT, values, COLUMN_STUDENT_UNIVERSITY + " = " + uri.getPathSegments().get(1) +
+                        (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
+
+            default:
+                throw new IllegalArgumentException("Unknown URI " + uri);
+        }
     }
 
     public static class DataProviderHelper extends SQLiteOpenHelper {
