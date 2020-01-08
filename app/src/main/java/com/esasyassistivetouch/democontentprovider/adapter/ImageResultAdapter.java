@@ -1,4 +1,4 @@
-package com.esasyassistivetouch.democontentprovider;
+package com.esasyassistivetouch.democontentprovider.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.esasyassistivetouch.democontentprovider.model.ImageResult;
+import com.esasyassistivetouch.democontentprovider.R;
 
 import java.text.DecimalFormat;
 import java.util.List;

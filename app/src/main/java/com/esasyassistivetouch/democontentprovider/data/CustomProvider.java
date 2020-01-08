@@ -1,4 +1,4 @@
-package com.esasyassistivetouch.democontentprovider;
+package com.esasyassistivetouch.democontentprovider.data;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;

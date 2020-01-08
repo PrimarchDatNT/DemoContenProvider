@@ -1,4 +1,4 @@
-package com.esasyassistivetouch.democontentprovider;
+package com.esasyassistivetouch.democontentprovider.model;
 
 public class ImageResult {
     private String id;

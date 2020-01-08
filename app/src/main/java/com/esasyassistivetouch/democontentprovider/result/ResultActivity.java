@@ -1,4 +1,4 @@
-package com.esasyassistivetouch.democontentprovider;
+package com.esasyassistivetouch.democontentprovider.result;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.esasyassistivetouch.democontentprovider.R;
+import com.esasyassistivetouch.democontentprovider.data.StudentProvider;
 
 public class ResultActivity extends AppCompatActivity {
     TextView tvResult;

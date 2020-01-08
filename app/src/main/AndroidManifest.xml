@@ -9,13 +9,13 @@
         android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
 
-
     <permission
-        android:name="com.esasyassistivetouch.democontentprovider.StudentProvider.WRITE_DATABASE"
+        android:name="com.esasyassistivetouch.democontentprovider.data.StudentProvider.WRITE_DATABASE"
         android:label="Write Database"
         android:protectionLevel="normal" />
+
     <permission
-        android:name="com.esasyassistivetouch.democontentprovider.StudentProvider.READ_DATABASE"
+        android:name="com.esasyassistivetouch.democontentprovider.data.StudentProvider.READ_DATABASE"
         android:label="Read Database"
         android:protectionLevel="normal" />
 
@@ -29,26 +29,17 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
         <provider
-            android:name=".StudentProvider"
-            android:authorities="com.esasyassistivetouch.democontentprovider.StudentProvider"
+            android:name=".data.StudentProvider"
+            android:authorities="com.esasyassistivetouch.democontentprovider.data.StudentProvider"
             android:enabled="true"
             android:exported="true"
             android:readPermission="com.esasyassistivetouch.democontentprovider.StudentProvider.READ_DATABASE"
-            android:writePermission="com.esasyassistivetouch.democontentprovider.StudentProvider.WRITE_DATABASE" />
+            android:writePermission="com.esasyassistivetouch.democontentprovider.StudentProvider.READ_DATABASE" />
 
-        <activity android:name=".ResultActivity" />
-        <activity android:name=".CreateDBActivity" />
-
-        <provider
-            android:name=".CustomProvider"
-            android:authorities="com.segu.demo.provider"
-            android:enabled="true"
-            android:exported="true"
-            android:readPermission="com.segu.demo.provider.READ_DATABASE"
-            android:writePermission="com.segu.demo.provider.WRITE_DATABASE" />
-
-        <activity android:name=".DetailActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".result.ResultActivity" />
+        <activity android:name=".main.CreateDBActivity" />
+        <activity android:name=".main.DetailActivity" />
+        <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

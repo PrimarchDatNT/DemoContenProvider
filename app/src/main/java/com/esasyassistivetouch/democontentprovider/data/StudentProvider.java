@@ -1,4 +1,4 @@
-package com.esasyassistivetouch.democontentprovider;
+package com.esasyassistivetouch.democontentprovider.data;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -24,7 +24,7 @@ public class StudentProvider extends ContentProvider {
     public static final int URI_COLUMN_STUDENT_NAME_CODE = 3;
     public static final int URI_COLUMN_STUDENT_UNIVERSITY_CODE = 4;
     public static final int DATABASE_VERSION = 1;
-    public static final String AUTHOR = "com.esasyassistivetouch.democontentprovider.StudentProvider";
+    public static final String AUTHOR = "com.esasyassistivetouch.democontentprovider.data.StudentProvider";
     public static final String DATABASE_BASE_NAME = "StudentInformation";
     public static final String TABLE_NAME_STUDENT = "Information";
     public static final String COLUMN_STUDENT_NAME = "_name";
@@ -63,7 +63,18 @@ public class StudentProvider extends ContentProvider {
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
-        return null;
+        switch (uriMatcher.match(uri)) {
+
+            case URI_TABLE_STUDENT_CODE:
+                return "vnd.android.cursor.dir/vnd.com.esasyassistivetouch.democontentprovider.data.StudentProvider";
+            case URI_COLUMN_STUDENT_ID_CODE:
+            case URI_COLUMN_STUDENT_NAME_CODE:
+            case URI_COLUMN_STUDENT_UNIVERSITY_CODE:
+                return "vnd.android.cursor.item/vnd.com.esasyassistivetouch.democontentprovider.data.StudentProvider";
+
+            default:
+                throw new IllegalArgumentException("Unsupported URI: " + uri);
+        }
     }
 
     @Nullable
@@ -108,17 +119,12 @@ public class StudentProvider extends ContentProvider {
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
         switch (uriMatcher.match(uri)) {
             case URI_COLUMN_STUDENT_ID_CODE:
-                return database.update(TABLE_NAME_STUDENT, values, COLUMN_STUDENT_ID + " = " + uri.getPathSegments().get(1) +
-                        (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
 
             case URI_COLUMN_STUDENT_NAME_CODE:
-                return database.update(TABLE_NAME_STUDENT, values, COLUMN_STUDENT_NAME + " = " + uri.getPathSegments().get(1) +
-                        (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
 
             case URI_COLUMN_STUDENT_UNIVERSITY_CODE:
-                return database.update(TABLE_NAME_STUDENT, values, COLUMN_STUDENT_UNIVERSITY + " = " + uri.getPathSegments().get(1) +
+                return database.update(TABLE_NAME_STUDENT, values, COLUMN_STUDENT_ID + " = " + uri.getPathSegments().get(1) +
                         (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
-
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
@@ -126,8 +132,10 @@ public class StudentProvider extends ContentProvider {
 
     public static class DataProviderHelper extends SQLiteOpenHelper {
 
-        private static final String CREATE_DB_TABLE = "CREATE TABLE " + TABLE_NAME_STUDENT + " (" + COLUMN_STUDENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_STUDENT_NAME + " TEXT, " +
-                COLUMN_STUDENT_UNIVERSITY + " TEXT " + ")";
+        private static final String CREATE_DB_TABLE = "CREATE TABLE " + TABLE_NAME_STUDENT
+                + " (" + COLUMN_STUDENT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COLUMN_STUDENT_NAME + " TEXT, "
+                + COLUMN_STUDENT_UNIVERSITY + " TEXT " + ")";
 
 
         DataProviderHelper(Context context) {
