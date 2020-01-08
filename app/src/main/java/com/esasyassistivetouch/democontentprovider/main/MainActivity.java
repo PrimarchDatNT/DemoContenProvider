@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rvListImage.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         rvListImage.setItemAnimator(new DefaultItemAnimator());
         rvListImage.setNestedScrollingEnabled(false);
+        btCreate.setOnClickListener(this);
+        btGetList.setOnClickListener(this);
     }
 
 
@@ -54,12 +56,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Cursor cursor;
         if (arg.equals(NO_ARGUMENT)) {
 
-            cursor = this.getContentResolver().query(CONTENT_URI_IMAGE, null, null
+            cursor = this.getContentResolver().query(CONTENT_URI_IMAGE, PROJECTION, null
                     , null, MediaStore.MediaColumns._ID + " DESC");
+            //lay _id , size, name, uri cua tat ca anh trong bang MediaStore.Images.Media.EXTERNAL_CONTENT_URI cua he thong
         } else {
 
             cursor = this.getContentResolver().query(CONTENT_URI_IMAGE, PROJECTION, MediaStore.MediaColumns._ID + " = ?"
                     , new String[]{arg}, MediaStore.MediaColumns._ID + " ASC");
+            //lay _id , size, name, uri cua 1 anh trong bang MediaStore.Images.Media.EXTERNAL_CONTENT_URI voi id la selectionArg dc truyen vao
         }
         ArrayList<ImageResult> listImageResult = new ArrayList<>();
         if (cursor != null) {

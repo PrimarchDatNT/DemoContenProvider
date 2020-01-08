@@ -33,6 +33,8 @@ public class CreateDBActivity extends AppCompatActivity implements View.OnClickL
         edStudentUni = findViewById(R.id.ed_student_uni);
         btAdd = findViewById(R.id.bt_add);
         btRetrive = findViewById(R.id.bt_retrive);
+        btAdd.setOnClickListener(this);
+        btRetrive.setOnClickListener(this);
     }
 
     @Override

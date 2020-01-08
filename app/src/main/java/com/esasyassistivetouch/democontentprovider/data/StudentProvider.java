@@ -103,12 +103,12 @@ public class StudentProvider extends ContentProvider {
 
             case URI_COLUMN_STUDENT_NAME_CODE:
                 String studentName = uri.getPathSegments().get(1);
-                return database.delete(TABLE_NAME_STUDENT, COLUMN_STUDENT_NAME + " = " + studentName + // xoa theo cot _name
+                return database.delete(TABLE_NAME_STUDENT, COLUMN_STUDENT_NAME + " = ?" + studentName + // xoa theo cot _name
                         (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
 
             case URI_COLUMN_STUDENT_UNIVERSITY_CODE:
                 String studentUniversity = uri.getPathSegments().get(1);
-                return database.delete(TABLE_NAME_STUDENT, COLUMN_STUDENT_UNIVERSITY + " = " + studentUniversity + // xoa theo cot _uni
+                return database.delete(TABLE_NAME_STUDENT, COLUMN_STUDENT_UNIVERSITY + " = ?" + studentUniversity + // xoa theo cot _uni
                         (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
@@ -118,13 +118,11 @@ public class StudentProvider extends ContentProvider {
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
         switch (uriMatcher.match(uri)) {
+            case URI_TABLE_STUDENT_CODE:
             case URI_COLUMN_STUDENT_ID_CODE:
-
             case URI_COLUMN_STUDENT_NAME_CODE:
-
             case URI_COLUMN_STUDENT_UNIVERSITY_CODE:
-                return database.update(TABLE_NAME_STUDENT, values, COLUMN_STUDENT_ID + " = " + uri.getPathSegments().get(1) +
-                        (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : ""), selectionArgs);
+                return database.update(TABLE_NAME_STUDENT, values, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }

@@ -33,8 +33,8 @@
             android:authorities="com.esasyassistivetouch.democontentprovider.data.StudentProvider"
             android:enabled="true"
             android:exported="true"
-            android:readPermission="com.esasyassistivetouch.democontentprovider.StudentProvider.READ_DATABASE"
-            android:writePermission="com.esasyassistivetouch.democontentprovider.StudentProvider.READ_DATABASE" />
+            android:readPermission="com.esasyassistivetouch.democontentprovider.data.StudentProvider.READ_DATABASE"
+            android:writePermission="com.esasyassistivetouch.democontentprovider.data.StudentProvider.WRITE_DATABASE" />
 
         <activity android:name=".result.ResultActivity" />
         <activity android:name=".main.CreateDBActivity" />

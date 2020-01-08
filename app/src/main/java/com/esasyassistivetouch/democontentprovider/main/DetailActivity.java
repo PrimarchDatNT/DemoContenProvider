@@ -39,6 +39,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         ivDetail = findViewById(R.id.iv_image_detail);
         btShare = findViewById(R.id.bt_share);
         btDelete = findViewById(R.id.bt_delete);
+        btDelete.setOnClickListener(this);
+        btShare.setOnClickListener(this);
     }
 
     @Override
